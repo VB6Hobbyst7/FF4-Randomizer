@@ -8,7 +8,7 @@ g - *Ignore gender for names
 h - High MP progression for non-wizards
 i - Randomize inventory of shops
 j - *Randomize jobs (appearance)
-k - 
+k - Ignore kinds for equip skill randomization 
 l - Low MP progression for non-wizards
 m - Randomize magic (certain spells only)
 n - *Randomize names
