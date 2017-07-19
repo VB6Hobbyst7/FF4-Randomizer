@@ -2,10 +2,29 @@
 #include once "../common/deck.bas"
 #include once "../common/set.bas"
 #include once "../common/spinner.bas"
-#include once "../common/functions/tokenize.bas"
+#include once "../common/functions/minmax.bas"
 #include once "../common/functions/pad.bas"
+#include once "../common/functions/tokenize.bas"
+
+type MetaItem
+
+ itemdata as Item
+ level as UByte
+ slot as UByte
+ kind as String
+ female as Boolean
+ universal as Boolean
+
+end type
+
+const weapon_slot = 1
+const shield_slot = 2
+const head_slot = 3
+const body_slot = 4
+const arms_slot = 5
 
 dim shared ff4 as FF4Rom
+dim shared itemlist as List
 
 dim commandline as String
 dim filename as String
@@ -19,8 +38,16 @@ dim randomize_names as Boolean
 dim ignore_gender as Boolean
 dim randomize_commands as Boolean
 dim randomize_jobs as Boolean
+dim randomize_treasures as Boolean
+dim include_dummy as Boolean
+dim balance as Boolean
+dim actor_preserve as Boolean = true
+dim randomize_equips as Boolean
+dim female_preserve as Boolean = true
+dim ignore_kinds as Boolean
+dim randomize_spellsets as Boolean
 
-commandline = "test.smc r n j c"
+commandline = "test.smc e"
 'commandline = command
 
 'Parse command line
@@ -31,32 +58,62 @@ filename_tokens = Tokenize(filename, ".")
 
 'Configure settings based on command line flags
 for i as Integer = 2 to flags.Length()
+ if val(flags.ItemAt(i)) > 0 then seed = val(flags.ItemAt(i))
+ if flags.ItemAt(i) = "a" then actor_preserve = false
+ if flags.ItemAt(i) = "b" then balance = true
  if flags.ItemAt(i) = "c" then randomize_commands = true
+ if flags.ItemAt(i) = "d" then include_dummy = true
+ if flags.ItemAt(i) = "e" then randomize_equips = true
+ if flags.ItemAt(i) = "f" then female_preserve = false
  if flags.ItemAt(i) = "g" then ignore_gender = true
  if flags.ItemAt(i) = "j" then randomize_jobs = true
+ if flags.ItemAt(i) = "k" then ignore_kinds = true
  if flags.ItemAt(i) = "n" then randomize_names = true
  if flags.ItemAt(i) = "r" then rename_everything = true
- output_filename += lcase(flags.ItemAt(i))
+ if flags.ItemAt(i) = "s" then randomize_spellsets = true
+ if flags.ItemAt(i) = "t" then randomize_treasures = true
+ if val(flags.ItemAt(i)) = 0 then output_filename += lcase(flags.ItemAt(i))
  if i < flags.Length() then output_filename += " "
 next
 output_filename += ").smc"
 
 ff4.ReadFromFile(filename)
 
-#include once "genderofjob.bas"
-#include once "renameeverything.bas"
-#include once "randomizenames.bas"
-#include once "randomizejobs.bas"
-#include once "randomizecommands.bas"
+#include once "subs/fixsingaimequips.bas"
+#include once "subs/fixstartingequips.bas"
+#include once "subs/fixstartingspells.bas"
+#include once "subs/generateequipmentlist.bas"
+#include once "subs/genderofjob.bas"
+#include once "subs/givemp.bas"
+#include once "subs/maptier.bas"
+#include once "subs/renameeverything.bas"
+#include once "subs/streamlinekinds.bas"
+#include once "subs/randomizeequips.bas"
+#include once "subs/randomizenames.bas"
+#include once "subs/randomizejobs.bas"
+#include once "subs/randomizecommands.bas"
+#include once "subs/randomizespellsets.bas"
+#include once "subs/randomizetreasures.bas"
+#include once "subs/storeequipmentlist.bas"
 
 if seed = -1 then seed = timer
 randomize seed
 
+GenerateEquipmentList()
+'if streamline_kinds then StreamlineKinds()
 if rename_everything then RenameEverything()
+if randomize_treasures then RandomizeTreasures(include_dummy, balance)
 if randomize_jobs then RandomizeJobs()
 if randomize_names then RandomizeNames(ignore_gender)
-if randomize_commands then RandomizeCommands()
+if randomize_equips then RandomizeEquips(female_preserve, ignore_kinds)
+if randomize_commands then RandomizeCommands(actor_preserve)
+if randomize_spellsets then RandomizeSpellSets()
+'FixSingAimEquips()
+StoreEquipmentList()
+'if randomize_equips then FixStartingEquips()
+'FixStartingSpells()
 
-output_filename = filename_tokens.ItemAt(1) + " (Seed " + str(seed) + " - Flags " + output_filename
+output_filename = filename_tokens.ItemAt(1) + " (" + str(seed) + " " + output_filename
 
 ff4.WriteToFile(output_filename)
+

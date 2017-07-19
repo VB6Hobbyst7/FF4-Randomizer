@@ -1,25 +1,71 @@
 FLAGS
 =====
 
-n - Randomize character names. The names come from the included file
-    "names.dat". This is just a plain text file that you can feel free
-    to edit to your heart's content. Simply put a list of female names
-    under the heading "FEMALE NAMES", a list of male names under
-    "MALE NAMES", and optionally, a list of neutral names under
-    "NEUTRAL NAMES". If you do edit the list, make sure you have at
-    least 4 female names and at least 10 male names, and that all of
-    the names are at most 6 letters long. Names longer than 6 letters
-    will be truncated to 6; the letters past the sixth will get
-    dropped.
+b - Balance item distribution.
+    If this flag is set, the randomizer will do its best to give items of
+    appropriate power level for where they appear. This includes treasures, if
+    you randomize those, and starting equipment, if you randomize equip skills
+    or the equipment list.
+
+c - Randomize the menu commands of actors.
+    Spell sets will also be redistributed along with the regular commands.
+    Characters that do not normally get any MP will start with (Level x 2) MP
+    and will gain 4 MP per level. Certain commands are given special treatment:
+    Twin could appear on both Palom and Porom or on no one. Cover and Hide will
+    each only appear on at most one actor, and will not appear on a returning
+    actor. Commands which require a certain type of item equipped in order to
+    work will give the actor that equip skill if they don't already have it.
     
-    g - Ignore gender when randomizing names. The names.dat file still has to
-        conform to the above restrictions, even if you plan on using this flag.
+    a - Actors can have different commands when returning.
+        By default, returning characters will have the same commands they had
+        when they left. With this flag set, those actors' commands will be
+        re-randomized. They will still keep the same spell sets they had when
+        they left.
+
+e - Randomize equip skills.
+    This randomizes which character jobs can use which types of equipment. It
+    will automatically change the starting equipment of actors to match their
+    new equip skills. If the balance flag is not set, it will randomize from
+    among all equippable items for each slot when determining starting
+    eqiupment.
+    
+    f - Randomize female equipment.
+        There are certain items such as Tiara and Heroine which can only be
+        used by female characters. Normally, the randomization will leave these
+        alone, but by setting this flag, you can overwrite that and have those
+        items be treated like the others.
+    
+j - Randomize jobs.
+    This basically just shuffles around the appearances of the playable
+    characters; they will retain their spell sets, commands, etc., unless you
+    also set the flags to randomize those as well.
+    
+k - Streamline kinds of equipment.
+    Normally, there are some characters who can equip some items of a certain
+    type but not all. For example, Paladin Cecil can use certain staffs but not
+    all staffs. This makes it so that each character can either use all items
+    of a given kind or none of that kind.
+
+n - Randomize character names.
+    There is a built-in list of character names that it will shuffle up and
+    deal out to all the playable characters plus Golbez and Anna. By default,
+    male characters will only receive male or neutral names, and female
+    characters will only receive female or neutral names. Gender is determined
+    by your job, so if you randomize jobs, the genders will change accordingly.
         
-c - Randomize the menu commands of actors. Certain commands are given special
-    treatment: Twin could appear on both Palom and Porom if they both have room
-    in their command lists after randomizing the other commands, but will not
-    appear on anyone else. Cover and Hide will each only appear on at most one
-    actor, and will not appear on a returning actor.
+    g - Ignore gender when randomizing names.
+        
+r - Rename everything.
+    This changes all the "Dummy" and "D" in the text to more useful labels.
     
-r - Rename everything. This changes all the "Dummy" and "D" in the text to
-    more useful labels.
+s - Randomize spell sets.
+    This changes the order in which the spells in each spell set are learned.
+    It doesn't change what spells the set contains. Spells learned by story
+    events will not be altered.
+
+t - Randomize treasures.
+    The same chests that were trapped in the original will still be trapped;
+    only the contents are changed. Normally, only items that were accessible
+    originally can be found in the chests.
+    
+    d - Include items that were dummied in the original FF2US.
