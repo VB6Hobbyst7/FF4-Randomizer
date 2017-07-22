@@ -46,8 +46,9 @@ dim randomize_equips as Boolean
 dim female_preserve as Boolean = true
 dim ignore_kinds as Boolean
 dim randomize_spellsets as Boolean
+dim include_extras as Boolean
 
-commandline = "test.smc e"
+commandline = "test.smc n x"
 'commandline = command
 
 'Parse command line
@@ -62,7 +63,6 @@ for i as Integer = 2 to flags.Length()
  if flags.ItemAt(i) = "a" then actor_preserve = false
  if flags.ItemAt(i) = "b" then balance = true
  if flags.ItemAt(i) = "c" then randomize_commands = true
- if flags.ItemAt(i) = "d" then include_dummy = true
  if flags.ItemAt(i) = "e" then randomize_equips = true
  if flags.ItemAt(i) = "f" then female_preserve = false
  if flags.ItemAt(i) = "g" then ignore_gender = true
@@ -72,6 +72,8 @@ for i as Integer = 2 to flags.Length()
  if flags.ItemAt(i) = "r" then rename_everything = true
  if flags.ItemAt(i) = "s" then randomize_spellsets = true
  if flags.ItemAt(i) = "t" then randomize_treasures = true
+ if flags.ItemAt(i) = "u" then include_dummy = true
+ if flags.ItemAt(i) = "x" then include_extras = true
  if val(flags.ItemAt(i)) = 0 then output_filename += lcase(flags.ItemAt(i))
  if i < flags.Length() then output_filename += " "
 next
@@ -100,20 +102,20 @@ if seed = -1 then seed = timer
 randomize seed
 
 GenerateEquipmentList()
-'if streamline_kinds then StreamlineKinds()
-if rename_everything then RenameEverything()
 if randomize_treasures then RandomizeTreasures(include_dummy, balance)
 if randomize_jobs then RandomizeJobs()
-if randomize_names then RandomizeNames(ignore_gender)
+if randomize_names then RandomizeNames(ignore_gender, include_extras)
 if randomize_equips then RandomizeEquips(female_preserve, ignore_kinds)
 if randomize_commands then RandomizeCommands(actor_preserve)
 if randomize_spellsets then RandomizeSpellSets()
-'FixSingAimEquips()
+FixSingAimEquips()
 StoreEquipmentList()
-'if randomize_equips then FixStartingEquips()
-'FixStartingSpells()
+if rename_everything then RenameEverything()
+if randomize_equips then FixStartingEquips(balance)
+FixStartingSpells()
 
 output_filename = filename_tokens.ItemAt(1) + " (" + str(seed) + " " + output_filename
 
 ff4.WriteToFile(output_filename)
+
 

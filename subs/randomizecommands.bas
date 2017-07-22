@@ -52,6 +52,7 @@ sub RandomizeCommands(actor_preserve as Boolean)
  jobs.Shuffle()
  
  current_job = asc(jobs.Draw())
+ actors_of_job = ff4.ActorsOfJob(current_job)
  ff4.AssignSpellSet(current_job, edge_spellset, "black")
  ff4.GiveActorCommand(asc(actors_of_job.ItemAt(1)), ninja_command)
 

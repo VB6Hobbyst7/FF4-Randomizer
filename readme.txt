@@ -3,9 +3,8 @@ FLAGS
 
 b - Balance item distribution.
     If this flag is set, the randomizer will do its best to give items of
-    appropriate power level for where they appear. This includes treasures, if
-    you randomize those, and starting equipment, if you randomize equip skills
-    or the equipment list.
+    appropriate power level for where they appear. This includes treasures,
+    starting equipment, and shops.
 
 c - Randomize the menu commands of actors.
     Spell sets will also be redistributed along with the regular commands.
@@ -28,6 +27,13 @@ e - Randomize equip skills.
     new equip skills. If the balance flag is not set, it will randomize from
     among all equippable items for each slot when determining starting
     eqiupment.
+
+    k - Ignore kinds of equipment.
+        Normally, the equipment is organized into groups and a character can
+        equip (or can't equip) all items of a given group (swords, axes, rods,
+        etc). With this flag set, each individual piece of equipment will be
+        treated independently; just because you can equip one sword doesn't
+        mean you can equip any other swords.
     
     f - Randomize female equipment.
         There are certain items such as Tiara and Heroine which can only be
@@ -40,12 +46,6 @@ j - Randomize jobs.
     characters; they will retain their spell sets, commands, etc., unless you
     also set the flags to randomize those as well.
     
-k - Streamline kinds of equipment.
-    Normally, there are some characters who can equip some items of a certain
-    type but not all. For example, Paladin Cecil can use certain staffs but not
-    all staffs. This makes it so that each character can either use all items
-    of a given kind or none of that kind.
-
 n - Randomize character names.
     There is a built-in list of character names that it will shuffle up and
     deal out to all the playable characters plus Golbez and Anna. By default,
@@ -54,6 +54,8 @@ n - Randomize character names.
     by your job, so if you randomize jobs, the genders will change accordingly.
         
     g - Ignore gender when randomizing names.
+    
+    x - Include extras (named characters other than the playable ones).
         
 r - Rename everything.
     This changes all the "Dummy" and "D" in the text to more useful labels.
@@ -68,4 +70,6 @@ t - Randomize treasures.
     only the contents are changed. Normally, only items that were accessible
     originally can be found in the chests.
     
-    d - Include items that were dummied in the original FF2US.
+    u - Un-dummy items that were removed from the original FF2US.
+    
+

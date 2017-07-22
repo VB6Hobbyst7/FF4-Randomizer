@@ -9,6 +9,8 @@ sub RandomizeEquips(female_preserve as Boolean, ignore_kinds as Boolean)
  dim armscharts as Spinner
  dim found as Boolean
  
+ special_codes.AddItem(chr(31))
+ 
  'Set the equip codes
  if ignore_kinds then
   for i as Integer = 1 to ff4.armors_range.finish

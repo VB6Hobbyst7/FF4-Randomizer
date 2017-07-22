@@ -41,6 +41,7 @@ sub GenerateEquipmentList()
    case cat_claw_item, fire_sword_item, drain_sword_item, sleep_sword_item, _
         flame_spear_item, drain_spear_item, short_katana_item, _
         middle_katana_item, chain_whip_item, dwarf_axe_item, archer_bow_item, _
+        darkness_arrows_item, poison_arrows_item, _
         fire_shield_item, tiara_item, bandanna_item, fire_armor_item, _
         black_belt_item, strength_ring_item, rune_ring_item
     link->level = 4
@@ -48,8 +49,8 @@ sub GenerateEquipmentList()
    case charm_rod_item, power_staff_item, lunar_staff_item, light_sword_item, _
         icebrand_item, blizzard_spear_item, long_katana_item, _
         ninja_katana_item, blitz_whip_item, shuriken_item, boomerang_item, _
-        poison_axe_item, elven_bow_item, darkness_arrows_item, _
-        poison_arrows_item, mute_arrows_item, charm_arrows_item, _
+        poison_axe_item, elven_bow_item, _
+        mute_arrows_item, charm_arrows_item, _
         ice_shield_item, diamond_shield_item, aegis_shield_item, _
         diamond_helm_item, ice_armor_item, diamond_armor_item, _
         black_robe_item, sorcerer_robe_item, diamond_gauntlet_item, _
@@ -62,8 +63,7 @@ sub GenerateEquipmentList()
         samurai_bow_item, samurai_arrows_item, medusa_arrows_item, _
         samurai_shield_item, dragoon_shield_item, samurai_helm_item, _
         dragoon_helm_item, ninja_hat_item, samurai_armor_item, _
-        zeus_gauntlet_item, samurai_gauntlet_item, dragoon_gauntlet_item, _
-        protect_ring_item
+        zeus_gauntlet_item, samurai_gauntlet_item, dragoon_gauntlet_item
     link->level = 6
    'The seventh tier is the stuff in trapped chests in the sixth segment
    case stardust_rod_item, lilith_rod_item, life_staff_item, _
@@ -74,7 +74,7 @@ sub GenerateEquipmentList()
         ribbon_item, glass_item, dragoon_armor_item, crystal_armor_item, _
         white_robe_item, power_vest_item, heroine_robe_item, _
         adamant_armor_item, ninja_gear_item, crystal_gauntlet_item, _
-        crystal_ring_item, cursed_ring_item
+        crystal_ring_item, cursed_ring_item, protect_ring_item
     link->level = 7
    case else
     link->level = 0

@@ -1,4 +1,4 @@
-sub FixStartingEquips()
+sub FixStartingEquips(balance as Boolean)
 
  dim tier as Integer
  dim link as MetaItem ptr
@@ -33,7 +33,7 @@ sub FixStartingEquips()
   arms.Destroy()
   for j as Integer = 1 to itemlist.Length()
    link = itemlist.PointerAt(j)
-   if link->level = tier then
+   if cbool(link->level = tier) or not balance then
     if ff4.CanEquip(i, j) then
      if ff4.weapons_range.InRange(j) then weapons.AddCard(chr(j))
      if ff4.shield_range.InRange(j) then shields.AddCard(chr(j))
@@ -43,51 +43,31 @@ sub FixStartingEquips()
     end if
    end if
   next
-  if weapons.Size() > 0 then
-   weapons.Shuffle()
-  else
+  if cbool(weapons.Size() = 0) and balance then
    for j as Integer = 1 to itemlist.Length()
     if ff4.CanEquip(i, j) then
-     if ff4.weapons_range.InRange(j) then weapons.AddCard(chr(j))
+     link = itemlist.PointerAt(j)
+     if link->level < tier then
+      if ff4.weapons_range.InRange(j) then weapons.AddCard(chr(j))
+     end if
     end if
    next
   end if
-  if shields.Size() > 0 then
-   shields.Shuffle()
-  else
+  if cbool(bodys.Size() = 0) and balance then
    for j as Integer = 1 to itemlist.Length()
     if ff4.CanEquip(i, j) then
-     if ff4.shield_range.InRange(j) then shields.AddCard(chr(j))
+     link = itemlist.PointerAt(j)
+     if link->level < tier then
+      if ff4.body_range.InRange(j) then bodys.AddCard(chr(j))
+     end if
     end if
    next
   end if
-  if heads.Size() > 0 then
-   heads.Shuffle()
-  else
-   for j as Integer = 1 to itemlist.Length()
-    if ff4.CanEquip(i, j) then
-     if ff4.head_range.InRange(j) then heads.AddCard(chr(j))
-    end if
-   next
-  end if
-  if bodys.Size() then
-   bodys.Shuffle()
-  else
-   for j as Integer = 1 to itemlist.Length()
-    if ff4.CanEquip(i, j) then
-     if ff4.body_range.InRange(j) then bodys.AddCard(chr(j))
-    end if
-   next
-  end if
-  if arms.Size() then
-   arms.Shuffle()
-  else
-   for j as Integer = 1 to itemlist.Length()
-    if ff4.CanEquip(i, j) then
-     if ff4.arms_range.InRange(j) then arms.AddCard(chr(j))
-    end if
-   next
-  end if  
+  weapons.Shuffle()
+  shields.Shuffle()
+  heads.Shuffle()
+  bodys.Shuffle()
+  arms.Shuffle()
   
   ff4.Unequip(i)
   
@@ -107,19 +87,19 @@ sub FixStartingEquips()
    end if
   end if
   
-  if not ff4.arrow_range.InRange(temp) and not ff4.bow_range.InRange(temp) and not ff4.two_handed_range.InRange(temp) then
+  if cbool(temp > 0) and not ff4.arrow_range.InRange(temp) and not ff4.bow_range.InRange(temp) and not ff4.two_handed_range.InRange(temp) then
    if ff4.characters(ff4.actors(i).level_link).right_handed and ff4.characters(ff4.actors(i).level_link).left_handed then
     weapons.AddCard(chr(temp))
     weapons.Shuffle()
     ff4.Equip(i, asc(weapons.Draw()))
    else
-    if RollDie(4) > 1 and shields.Size() > 0 then
+    if RollDie(6) > 1 and shields.Size() > 0 then
      ff4.Equip(i, asc(shields.Draw()))
     end if
    end if
   end if
   
-  if heads.Size() > 0 and RollDie(4) > 1 then
+  if heads.Size() > 0 and RollDie(6) > 1 then
    ff4.Equip(i, asc(heads.Draw()))
   end if
   
