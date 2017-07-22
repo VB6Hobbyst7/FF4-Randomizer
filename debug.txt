@@ -1,9 +1,0 @@
-BEFORE
-Desc start: 206
-Desc end:   231
-Total desc: 25
-
-AFTER
-Desc start: 206
-Desc end:   231
-Total desc: 25
