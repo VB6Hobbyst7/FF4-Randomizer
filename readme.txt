@@ -84,14 +84,21 @@ n - Randomize character names.
     
     x - Include extras (named characters other than the playable ones).
         
-r - Rename everything.
-    This changes all the "Dummy" and "D" in the text to more useful labels.
-    
-s - Randomize spell sets.
+o - Randomize order spells are learned in spell sets.
     This changes the order in which the spells in each spell set are learned.
     It doesn't change what spells the set contains. Spells learned by story
     events will not be altered.
 
+r - Rename everything.
+    This changes all the "Dummy" and "D" in the text to more useful labels.
+
+s - Randomize starting equips.
+    This gives all actors random starting equipment. This will automatically
+    happen even without setting this flag if you randomize equip skills or if
+    you randomize the equipment list. It will only give an actor items that
+    actor could equip. If the balance flag is set, each actor will get starting
+    equipment appropriate for the point in the game at which it joins.
+    
 t - Randomize treasures.
     The same chests that were trapped in the original will still be trapped;
     only the contents are changed. Normally, only items that were accessible

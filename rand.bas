@@ -47,9 +47,12 @@ dim female_preserve as Boolean = true
 dim ignore_kinds as Boolean
 dim randomize_spellsets as Boolean
 dim include_extras as Boolean
+dim randomize_starting_gear as Boolean
 
 'commandline = "test.smc b c e j n x r s t u"
 commandline = command
+
+if commandline = "" then end
 
 'Parse command line
 flags = Tokenize(commandline)
@@ -69,8 +72,9 @@ for i as Integer = 2 to flags.Length()
  if flags.ItemAt(i) = "j" then randomize_jobs = true
  if flags.ItemAt(i) = "k" then ignore_kinds = true
  if flags.ItemAt(i) = "n" then randomize_names = true
+ if flags.ItemAt(i) = "o" then randomize_spellsets = true
  if flags.ItemAt(i) = "r" then rename_everything = true
- if flags.ItemAt(i) = "s" then randomize_spellsets = true
+ if flags.ItemAt(i) = "s" then randomize_starting_gear = true
  if flags.ItemAt(i) = "t" then randomize_treasures = true
  if flags.ItemAt(i) = "u" then include_dummy = true
  if flags.ItemAt(i) = "x" then include_extras = true
@@ -111,7 +115,7 @@ if randomize_spellsets then RandomizeSpellSets()
 FixSingAimEquips()
 StoreEquipmentList()
 if rename_everything then RenameEverything()
-if randomize_equips then FixStartingEquips(balance)
+if randomize_equips or randomize_starting_gear then FixStartingEquips(balance)
 FixStartingSpells()
 
 output_filename = filename_tokens.ItemAt(1) + " (" + str(seed) + " " + output_filename
