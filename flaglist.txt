@@ -9,20 +9,20 @@ h - High MP progression for non-wizards
 i - Randomize inventory of shops
 j - *Randomize jobs (appearance)
 k - Ignore kinds for equip skill randomization 
-l - Low MP progression for non-wizards
-m - Randomize magic (certain spells only)
+l - Randomize looks of NPCs (their sprites)
+m - Randomize magic list (certain spells only)
 n - *Randomize names
-o - *Randomize order spells are learned
+o - *Randomize order spells are learned in spell sets
 p - Randomize parameters of commands (sing, pray, etc)
 q - Randomize equipment list
 r - *Rename everything
-s - Randomize starting equipment
+s - *Randomize starting equipment
 t - *Randomize treasures
 u - *Undummy items and commands
 v - Randomize vitals (base stats) starting & levelup
 w - Wacky monster AI scripts
 x - Include extras (npcs) in name randomization
-y - YOLO mode (overrides other flags) (make everything truly random without safeguards)
+y - YOLO mode (overrides other flags) (make everything truly random without safeguards/logic)
 z - Zany monster powers (certain ones only)
 
 * = done
