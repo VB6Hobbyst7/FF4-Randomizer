@@ -63,5 +63,14 @@ sub RenameEverything()
  ff4.items(darkmatter_item).name = ff4.ConvertText("#D.Matter")
  ff4.items(unused1_item).name = ff4.ConvertText("#KeyItem1")
  ff4.items(unused2_item).name = ff4.ConvertText("#KeyItem2")
+ 
+ ff4.alert_messages(9).text = ff4.ConvertText("Not enough MP_")
+ ff4.alert_messages(15).text = ff4.ConvertText("Not enough potions_")
+ ff4.alert_messages(16).text = ff4.ConvertText("Prayer unanswered_")
+ ff4.alert_messages(57).text = ff4.ConvertText("Charging_")
+ ff4.alert_messages(58).text = ff4.ConvertText("Defense up!")
+ ff4.alert_messages(18).text = ff4.ConvertText("Spell power up!")
+ ff4.alert_messages(19).text = ff4.ConvertText("Enemies hesitate.")
+ ff4.alert_messages(54).text = ff4.ConvertText("Regenerating HP_")
 
 end sub

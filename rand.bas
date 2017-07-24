@@ -48,8 +48,8 @@ dim ignore_kinds as Boolean
 dim randomize_spellsets as Boolean
 dim include_extras as Boolean
 
-commandline = "test.smc n x"
-'commandline = command
+'commandline = "test.smc b c e j n x r s t u"
+commandline = command
 
 'Parse command line
 flags = Tokenize(commandline)

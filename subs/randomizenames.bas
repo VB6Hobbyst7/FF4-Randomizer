@@ -43,6 +43,7 @@ sub RandomizeNames(ignore_gender as Boolean, include_extras as Boolean)
  dim gender as String
  dim temp_names as List
  dim current_name as String
+ dim index as Integer
 
  'Female names
  female_names.AddCard("Rydia")
@@ -274,6 +275,23 @@ sub RandomizeNames(ignore_gender as Boolean, include_extras as Boolean)
 
   ff4.names(12) = ff4.ConvertText(male_names.Draw())
   ff4.names(13) = ff4.ConvertText(female_names.Draw())
+  
+  ff4.ReplaceAll(ff4.ConvertText("Golbez"), ff4.names(12), true)
+  ff4.monsters(golbez_v_tellah_monster).name = ff4.names(12)
+  ff4.monsters(golbez_monster).name = ff4.names(12)
+  
+  text = ff4.ConvertText(trim(ff4.DisplayText(ff4.jobs(ff4.characters(kain_character).job_index).name)))
+  
+  index = instr(ff4.bank1_messages(prologue_message).text, ff4.ConvertText("Thus, the"))
+  ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 1) + space_symbol + space_symbol + mid(ff4.bank1_messages(prologue_message).text, index)
+  if not ff4.characters(dk_character).job_index = dark_knight_job then
+   index = instr(ff4.bank1_messages(prologue_message).text, ff4.ConvertText("Dark Knight"))
+   ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 1) + ff4.jobs(ff4.characters(dk_character).job_index).name + mid(ff4.bank1_messages(prologue_message).text, index + 11)
+  end if
+  index = instr(ff4.bank1_messages(prologue_message).text, ff4.ConvertText("And he and"))
+  ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 2) + mid(ff4.bank1_messages(prologue_message).text, index)
+  index = instr(ff4.bank1_messages(prologue_message).text, ff4.ConvertText("Dragoon"))
+  ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 1) + text + mid(ff4.bank1_messages(prologue_message).text, index + 7)
 
  end if
  
@@ -353,46 +371,69 @@ sub RandomizeNames(ignore_gender as Boolean, include_extras as Boolean)
    male_names.Shuffle()
   end if
   
-  current_name = iif(ignore_gender, all_names.Draw(), female_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Valvalis"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), female_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Asura"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), female_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Sandy"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), female_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Cindy"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), female_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Mindy"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), female_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Luca"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), male_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Milon"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), male_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Kainazzo"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), male_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Rubicant"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), male_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Baigan"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), male_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Zemus"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), male_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Leviatan"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), male_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Giott"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), male_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Lugae"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), male_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Balnab"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), male_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Bahamut"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), male_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("KluYa"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), male_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Kory"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), male_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Odin"), ff4.ConvertText(current_name))
-  current_name = iif(ignore_gender, all_names.Draw(), male_names.Draw())   
-  ff4.ReplaceAll(ff4.ConvertText("Chamberlain"), ff4.ConvertText(current_name))
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), female_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Valvalis"), current_name, true)
+  ff4.monsters(valvalis_monster).name = current_name
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), female_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Asura"), current_name, true)
+  ff4.monsters(asura_monster).name = current_name
+  ff4.spells(asura_spell).name = summon_symbol + left(current_name, 5)
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), female_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Sandy"), current_name, true)
+  ff4.monsters(sandy_monster).name = current_name
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), female_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Cindy"), current_name, true)
+  ff4.monsters(cindy_monster).name = current_name
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), female_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Mindy"), current_name, true)
+  ff4.monsters(mindy_monster).name = current_name
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), female_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Luca"), current_name, true)
+  ff4.items(luca_key_item).name = key_symbol + current_name
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), male_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Milon"), current_name, true)
+  ff4.monsters(milon_monster).name = current_name
+  ff4.monsters(milon_z_monster).name = iif(len(current_name) > 7, left(current_name, 7), current_name + space_symbol) + ff4.ConvertText("Z")
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), male_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Kainazzo"), current_name, true)
+  ff4.monsters(kainazzo_monster).name = current_name
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), male_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Rubicant"), current_name, true)
+  ff4.monsters(rubicant_monster).name = current_name
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), male_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Baigan"), current_name, true)
+  ff4.monsters(baigan_monster).name = current_name
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), male_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Zemus"), current_name, true)
+  ff4.monsters(zemus_monster).name = current_name
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), male_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Leviatan"), current_name, true)
+  ff4.monsters(leviatan_monster).name = current_name
+  ff4.spells(levia_spell).name = summon_symbol + left(current_name, 5)
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), male_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Giott"), current_name, true)
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), male_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Lugae"), current_name, true)
+  ff4.monsters(lugae_small_monster).name = current_name
+  ff4.monsters(lugae_monster).name = current_name
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), male_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Balnab"), current_name, true)
+  ff4.monsters(balnab_monster).name = current_name
+  ff4.monsters(balnab_z_monster).name = iif(len(current_name) > 7, left(current_name, 7), current_name + space_symbol) + ff4.ConvertText("Z")
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), male_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Bahamut"), current_name, true)
+  ff4.monsters(bahamut_monster).name = current_name
+  ff4.spells(baham_spell).name = summon_symbol + left(current_name, 5)
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), male_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("KluYa"), current_name, true)
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), male_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Kory"), current_name, true)
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), male_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Odin"), current_name, true)
+  ff4.monsters(odin_monster).name = current_name
+  ff4.spells(odin_spell).name = summon_symbol + left(current_name, 5)
+  current_name = ff4.ConvertText(iif(ignore_gender, all_names.Draw(), male_names.Draw()))
+  ff4.ReplaceAll(ff4.ConvertText("Chamberlain"), current_name, true)
 
   if not ignore_gender then
    for i as Integer = 1 to female_names.Size()
@@ -404,10 +445,14 @@ sub RandomizeNames(ignore_gender as Boolean, include_extras as Boolean)
    all_names.Shuffle()
   end if
 
-  current_name = all_names.Draw()
-  ff4.ReplaceAll(ff4.ConvertText("Calbrena"), ff4.ConvertText(current_name))
-  current_name = all_names.Draw()
-  ff4.ReplaceAll(ff4.ConvertText("Zeromus"), ff4.ConvertText(current_name))
+  current_name = ff4.ConvertText(all_names.Draw())
+  ff4.ReplaceAll(ff4.ConvertText("Calbrena"), current_name, true)
+  ff4.monsters(calbrena_monster).name = current_name
+  current_name = ff4.ConvertText(all_names.Draw())
+  ff4.ReplaceAll(ff4.ConvertText("Zeromus"), current_name, true)
+  ff4.monsters(zeromus_shroud_monster).name = current_name
+  ff4.monsters(zeromus_monster).name = current_name
+  ff4.monsters(zeromus_cutscene_monster).name = current_name
   
   ff4.ReplaceAll(ff4.ConvertText("' "), ff4.ConvertText("'s "))
   ff4.ReplaceAll(ff4.ConvertText("s's"), ff4.ConvertText("s'"))

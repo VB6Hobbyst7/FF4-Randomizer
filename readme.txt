@@ -1,5 +1,32 @@
+USAGE
+=====
+
+Do not run this program by double-clicking on it in a Windows Explorer window.
+
+This is a command-line program. To run it:
+ * Open a terminal window. 
+ * Change to the directory where the program is.
+ * Type "rand" followed by the filename of the rom you wish to randomize
+    followed by a series of flags indicating what you wish to randomize.
+
+If the rom is not in the same folder as the program, you will have to specify
+the path as part of the filename.
+
+In addition to the flags, you can specify a seed. To do this, just include the
+seed number as part of the list of flags. You don't need to specify a seed.
+
+All flags should be separated by spaces.
+ 
+ Example: rand ff2us.smc 478937 a b c
+ 
+ WRONG: rand ff2us.smc 478937 abc
+ 
+
 FLAGS
 =====
+
+The list of flags and what they do are as follows:
+
 
 b - Balance item distribution.
     If this flag is set, the randomizer will do its best to give items of
