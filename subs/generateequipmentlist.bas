@@ -23,7 +23,7 @@ sub GenerateEquipmentList()
    case fire_claw_item, ice_claw_item, thunder_claw_item, flame_rod_item, _
         cure_staff_item, black_sword_item, legend_sword_item, _
         ancient_sword_item, silver_knife_item, wooden_hammer_item, _
-        avenger_item, black_shield_item, paladin_shield_item, _
+        black_shield_item, paladin_shield_item, _
         black_helm_item, paladin_helm_item, gaea_hat_item, headband_item, _
         black_armor_item, paladin_armor_item, gaea_gear_item, _
         black_gauntlet_item, paladin_gauntlet_item, silver_ring_item

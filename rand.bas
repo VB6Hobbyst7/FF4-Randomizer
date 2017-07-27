@@ -33,23 +33,24 @@ dim output_filename as String
 dim filename_tokens as List
 dim seed as Integer = -1
 
-dim rename_everything as Boolean
-dim randomize_names as Boolean
-dim ignore_gender as Boolean
-dim randomize_commands as Boolean
-dim randomize_jobs as Boolean
-dim randomize_treasures as Boolean
-dim include_dummy as Boolean
-dim balance as Boolean
 dim actor_preserve as Boolean = true
-dim randomize_equips as Boolean
+dim balance as Boolean
 dim female_preserve as Boolean = true
+dim ignore_gender as Boolean
 dim ignore_kinds as Boolean
-dim randomize_spellsets as Boolean
+dim include_dummy as Boolean
 dim include_extras as Boolean
+dim randomize_names as Boolean
+dim rename_everything as Boolean
+dim randomize_commands as Boolean
+dim randomize_equips as Boolean
+dim randomize_jobs as Boolean
+dim randomize_shops as Boolean
+dim randomize_spellsets as Boolean
 dim randomize_starting_gear as Boolean
+dim randomize_treasures as Boolean
 
-'commandline = "test.smc e k t u"
+'commandline = "test.smc i u r"
 commandline = command
 
 if commandline = "" then end
@@ -69,6 +70,7 @@ for i as Integer = 2 to flags.Length()
  if flags.ItemAt(i) = "e" then randomize_equips = true
  if flags.ItemAt(i) = "f" then female_preserve = false
  if flags.ItemAt(i) = "g" then ignore_gender = true
+ if flags.ItemAt(i) = "i" then randomize_shops = true
  if flags.ItemAt(i) = "j" then randomize_jobs = true
  if flags.ItemAt(i) = "k" then ignore_kinds = true
  if flags.ItemAt(i) = "n" then randomize_names = true
@@ -98,6 +100,7 @@ ff4.ReadFromFile(filename)
 #include once "subs/randomizenames.bas"
 #include once "subs/randomizejobs.bas"
 #include once "subs/randomizecommands.bas"
+#include once "subs/randomizeshops.bas"
 #include once "subs/randomizespellsets.bas"
 #include once "subs/randomizetreasures.bas"
 #include once "subs/storeequipmentlist.bas"
@@ -109,6 +112,7 @@ GenerateEquipmentList()
 if randomize_equips and not ignore_kinds then StreamlineKinds(female_preserve)
 StoreEquipmentList()
 if randomize_treasures then RandomizeTreasures(include_dummy, balance)
+if randomize_shops then RandomizeShops(include_dummy, balance)
 if randomize_jobs then RandomizeJobs()
 if randomize_names then RandomizeNames(ignore_gender, include_extras)
 if randomize_equips then RandomizeEquips(female_preserve, ignore_kinds)

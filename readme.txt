@@ -68,6 +68,14 @@ e - Randomize equip skills.
         alone, but by setting this flag, you can overwrite that and have those
         items be treated like the others.
     
+i - Randomize inventory of shops.
+    The "types" of shops will still be the same (weapon shops will still sell
+    weapons, armor shops will still sell armor, etc), but the specific items
+    available for sale and how many different items they sell will be random.
+    If you set the flag for balancing items, shops will sell better things as
+    you progress; likewise, if you set the flag to un-dummy items, those could
+    be for sale as well.
+
 j - Randomize jobs.
     This basically just shuffles around the appearances of the playable
     characters; they will retain their spell sets, commands, etc., unless you
@@ -104,6 +112,7 @@ t - Randomize treasures.
     only the contents are changed. Normally, only items that were accessible
     originally can be found in the chests.
     
-    u - Un-dummy items that were removed from the original FF2US.
+u - Un-dummy items that were removed from the original FF2US. This will make
+    them available in shops and in chests if you randomize either of those.
     
 
