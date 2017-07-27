@@ -143,25 +143,38 @@ sub RandomizeTreasures(include_dummy as Boolean, balance as Boolean)
 
  else 'so balance is false
  
-  for i as Integer = 1 to 95
-   weapons(1).AddSide(chr(i))
+  for i as Integer = ff4.weapons_range.start + 1 to ff4.weapons_range.finish
+   if cbool(i <> excalipur_item) or include_dummy then
+    weapons(1).AddSide(chr(i))
+   end if
   next
   
-  for i as Integer = 97 to 175
+  for i as Integer = ff4.armors_range.start + 1 to ff4.armors_range.finish
    armors(1).AddSide(chr(i))
   next
   
-  potions.AddSide(chr(cure1_item))
-  potions.AddSide(chr(cure2_item))
-  potions.AddSide(chr(cure3_item))
-  potions.AddSide(chr(ether1_item))
-  potions.AddSide(chr(ether2_item))
-  potions.AddSide(chr(elixir_item))
-  potions.AddSide(chr(heal_item))
-  potions.AddSide(chr(life_item))
-  potions.AddSide(chr(tent_item))
-  potions.AddSide(chr(cabin_item))
- 
+  if include_dummy then
+   for i as Integer = ff4.medicines_range.start to ff4.medicines_range.finish
+    if i <> crystal_item then
+     potions.AddSide(chr(i))
+    end if
+   next
+   for i as Integer = alert_item to whistle_item
+    potions.AddSide(chr(i))
+   next
+  else
+   potions.AddSide(chr(cure1_item))
+   potions.AddSide(chr(cure2_item))
+   potions.AddSide(chr(cure3_item))
+   potions.AddSide(chr(ether1_item))
+   potions.AddSide(chr(ether2_item))
+   potions.AddSide(chr(elixir_item))
+   potions.AddSide(chr(heal_item))
+   potions.AddSide(chr(life_item))
+   potions.AddSide(chr(tent_item))
+   potions.AddSide(chr(cabin_item))
+  end if
+  
   for i as Integer = 0 to total_maps
    for j as Integer = 1 to ff4.maps(i).triggers.Length()
     t = ff4.maps(i).triggers.PointerAt(j)

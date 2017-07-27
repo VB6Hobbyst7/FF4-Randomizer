@@ -1,14 +1,14 @@
-sub StreamlineKinds()
+sub StreamlineKinds(female_preserve as Boolean)
 
  dim link as MetaItem ptr
 
  'Change the equip codes of the items based on their kind 
  for i as Integer = 1 to itemlist.Length()
   link = itemlist.PointerAt(i)
-  if link->female then
+  if link->female and female_preserve then
    link->itemdata.equip_code = 1
-  'elseif link->universal then
-   'link->itemdata.equip_code = 0
+  elseif link->universal then
+   link->itemdata.equip_code = 0
   else
    select case link->kind
     case "Dark":      link->itemdata.equip_code = 2

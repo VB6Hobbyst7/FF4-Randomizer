@@ -147,10 +147,14 @@ sub GenerateEquipmentList()
   end select
   
   if link->itemdata.equip_code = 14 then link->female = true
-  if link->itemdata.equip_code <= 1 then link->universal = true
+  
+  select case i
+   case ribbon_item, glass_item, adamant_armor_item, prisoner_item, cursed_ring_item
+    link->universal = true
+  end select
   
   itemlist.Append(link)
   
  next
-
+ 
 end sub

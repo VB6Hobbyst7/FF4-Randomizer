@@ -49,7 +49,7 @@ dim randomize_spellsets as Boolean
 dim include_extras as Boolean
 dim randomize_starting_gear as Boolean
 
-'commandline = "test.smc b c e j n x r s t u"
+'commandline = "test.smc e k t u"
 commandline = command
 
 if commandline = "" then end
@@ -106,6 +106,8 @@ if seed = -1 then seed = timer
 randomize seed
 
 GenerateEquipmentList()
+if randomize_equips and not ignore_kinds then StreamlineKinds(female_preserve)
+StoreEquipmentList()
 if randomize_treasures then RandomizeTreasures(include_dummy, balance)
 if randomize_jobs then RandomizeJobs()
 if randomize_names then RandomizeNames(ignore_gender, include_extras)
@@ -113,7 +115,6 @@ if randomize_equips then RandomizeEquips(female_preserve, ignore_kinds)
 if randomize_commands then RandomizeCommands(actor_preserve)
 if randomize_spellsets then RandomizeSpellSets()
 FixSingAimEquips()
-StoreEquipmentList()
 if rename_everything then RenameEverything()
 if randomize_equips or randomize_starting_gear then FixStartingEquips(balance)
 FixStartingSpells()

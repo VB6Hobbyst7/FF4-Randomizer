@@ -12,13 +12,7 @@ sub RandomizeEquips(female_preserve as Boolean, ignore_kinds as Boolean)
  special_codes.AddItem(chr(31))
  
  'Set the equip codes
- if ignore_kinds then
-  for i as Integer = 1 to ff4.armors_range.finish
-   link = itemlist.PointerAt(i)
-   link->itemdata.equip_code = RollDie(31) - 1
-  next
- else
-  StreamlineKinds()
+ if not ignore_kinds then
   special_codes.AddItem(chr(0))
   special_codes.AddItem(chr(2))
   special_codes.AddItem(chr(3))
@@ -39,7 +33,14 @@ sub RandomizeEquips(female_preserve as Boolean, ignore_kinds as Boolean)
   next
  end if
  if female_preserve then special_codes.AddItem(chr(female_code))
-
+ if ignore_kinds then
+  for i as Integer = 1 to ff4.armors_range.finish
+   if not female_preserve or cbool(ff4.items(i).equip_code <> female_code) then
+    ff4.items(i).equip_code = RollDie(31) - 1
+   end if
+  next
+ end if
+ 
  'Unset all the flags for the normal codes
  for i as Integer = 0 to 30
   if not special_codes.Contains(chr(i)) then
@@ -51,16 +52,15 @@ sub RandomizeEquips(female_preserve as Boolean, ignore_kinds as Boolean)
 
  'Create the spinners for each slot 
  for i as Integer = 1 to ff4.armors_range.finish
-  link = itemlist.PointerAt(i)
-  if not special_codes.Contains(chr(link->itemdata.equip_code)) then
+  if not special_codes.Contains(chr(ff4.items(i).equip_code)) then
    if ff4.weapons_range.InRange(i) then
-    weaponcharts.AddSide(chr(link->itemdata.equip_code))
+    weaponcharts.AddSide(chr(ff4.items(i).equip_code))
    elseif ff4.head_range.InRange(i) then
-    headcharts.AddSide(chr(link->itemdata.equip_code))
+    headcharts.AddSide(chr(ff4.items(i).equip_code))
    elseif ff4.body_range.InRange(i) then
-    bodycharts.AddSide(chr(link->itemdata.equip_code))
+    bodycharts.AddSide(chr(ff4.items(i).equip_code))
    elseif ff4.arms_range.InRange(i) then
-    armscharts.AddSide(chr(link->itemdata.equip_code))
+    armscharts.AddSide(chr(ff4.items(i).equip_code))
    end if
   end if
  next

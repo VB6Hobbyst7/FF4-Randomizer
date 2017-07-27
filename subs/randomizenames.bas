@@ -248,6 +248,8 @@ sub RandomizeNames(ignore_gender as Boolean, include_extras as Boolean)
    all_names.AddCard(male_names.Draw())
   next
   
+  all_names.Shuffle()
+  
   for i as Integer = 0 to total_names
    ff4.names(i) = ff4.ConvertText(all_names.Draw())
   next
@@ -282,16 +284,16 @@ sub RandomizeNames(ignore_gender as Boolean, include_extras as Boolean)
   
   text = ff4.ConvertText(trim(ff4.DisplayText(ff4.jobs(ff4.characters(kain_character).job_index).name)))
   
-  index = instr(ff4.bank1_messages(prologue_message).text, ff4.ConvertText("Thus, the"))
-  ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 1) + space_symbol + space_symbol + mid(ff4.bank1_messages(prologue_message).text, index)
-  if not ff4.characters(dk_character).job_index = dark_knight_job then
-   index = instr(ff4.bank1_messages(prologue_message).text, ff4.ConvertText("Dark Knight"))
-   ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 1) + ff4.jobs(ff4.characters(dk_character).job_index).name + mid(ff4.bank1_messages(prologue_message).text, index + 11)
-  end if
+  'index = instr(ff4.bank1_messages(prologue_message).text, ff4.ConvertText("Thus, the"))
+  'ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 1) + space_symbol + space_symbol + mid(ff4.bank1_messages(prologue_message).text, index)
+  'if not ff4.characters(dk_character).job_index = dark_knight_job then
+   'index = instr(ff4.bank1_messages(prologue_message).text, ff4.ConvertText("Dark Knight"))
+   'ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 1) + ff4.jobs(ff4.characters(dk_character).job_index).name + mid(ff4.bank1_messages(prologue_message).text, index + 11)
+  'end if
   index = instr(ff4.bank1_messages(prologue_message).text, ff4.ConvertText("And he and"))
   ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 2) + mid(ff4.bank1_messages(prologue_message).text, index)
-  index = instr(ff4.bank1_messages(prologue_message).text, ff4.ConvertText("Dragoon"))
-  ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 1) + text + mid(ff4.bank1_messages(prologue_message).text, index + 7)
+  'index = instr(ff4.bank1_messages(prologue_message).text, ff4.ConvertText("Dragoon"))
+  'ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 1) + text + mid(ff4.bank1_messages(prologue_message).text, index + 7)
 
  end if
  
