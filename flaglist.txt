@@ -5,7 +5,7 @@ d - Randomize data for monsters
 e - *Randomize equip skills
 f - *Include female equipment in equip randomization
 g - *Ignore gender for names
-h - High MP progression for non-wizards
+h - *High MP progression for non-wizards
 i - *Randomize inventory of shops
 j - *Randomize jobs (appearance)
 k - *Ignore kinds for equip skill randomization 
@@ -19,7 +19,7 @@ r - *Rename everything
 s - *Randomize starting equipment
 t - *Randomize treasures
 u - *Undummy items and commands
-v - Randomize vitals (base stats) starting & levelup
+v - *Randomize vitals (base stats) starting & levelup
 w - Wacky monster AI scripts
 x - *Include extras (npcs) in name randomization
 y - YOLO mode (overrides other flags) (make everything truly random without safeguards/logic)
