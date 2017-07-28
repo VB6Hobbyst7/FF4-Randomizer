@@ -47,6 +47,14 @@ c - Randomize the menu commands of actors.
         when they left. With this flag set, those actors' commands will be
         re-randomized. They will still keep the same spell sets they had when
         they left.
+    
+    h - High MP progression for non-wizards.
+        Normally, randomizing the commands automatically gives some MP to
+        characters who don't normally get MP just in case they end up with some
+        spell sets. Setting this flag increases the amount of MP those
+        characters get to be more in line with the devoted spellcasting
+        characters. If you set the vitals flag, the MP amounts will be higher
+        for everyone.
 
 e - Randomize equip skills.
     This randomizes which character jobs can use which types of equipment. It
@@ -115,4 +123,8 @@ t - Randomize treasures.
 u - Un-dummy items that were removed from the original FF2US. This will make
     them available in shops and in chests if you randomize either of those.
     
-
+v - Randomize vitals.
+    This gives characters random starting stats and stat progressions. The
+    amount you start with in a stat will give you a good indication of how it
+    will progress. If the "higher starting MP" flag is set, it will also cause
+    characters to generally have higher MP progressions with this flag.

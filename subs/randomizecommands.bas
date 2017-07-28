@@ -1,4 +1,4 @@
-sub RandomizeCommands(actor_preserve as Boolean)
+sub RandomizeCommands(actor_preserve as Boolean, high_mp as Boolean)
 
  dim white as Deck
  dim black as Deck
@@ -10,7 +10,7 @@ sub RandomizeCommands(actor_preserve as Boolean)
  dim current_actor as UByte
  dim current_command as UByte
  
- GiveMP() 
+ GiveMP(high_mp) 
  
  ff4.ClearActorCommands()
 

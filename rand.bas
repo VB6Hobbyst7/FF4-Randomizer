@@ -36,6 +36,7 @@ dim seed as Integer = -1
 dim actor_preserve as Boolean = true
 dim balance as Boolean
 dim female_preserve as Boolean = true
+dim high_mp as Boolean
 dim ignore_gender as Boolean
 dim ignore_kinds as Boolean
 dim include_dummy as Boolean
@@ -49,8 +50,9 @@ dim randomize_shops as Boolean
 dim randomize_spellsets as Boolean
 dim randomize_starting_gear as Boolean
 dim randomize_treasures as Boolean
+dim randomize_vitals as Boolean
 
-'commandline = "test.smc i u r"
+'commandline = "test.smc c h"
 commandline = command
 
 if commandline = "" then end
@@ -70,6 +72,7 @@ for i as Integer = 2 to flags.Length()
  if flags.ItemAt(i) = "e" then randomize_equips = true
  if flags.ItemAt(i) = "f" then female_preserve = false
  if flags.ItemAt(i) = "g" then ignore_gender = true
+ if flags.ItemAt(i) = "h" then high_mp = true
  if flags.ItemAt(i) = "i" then randomize_shops = true
  if flags.ItemAt(i) = "j" then randomize_jobs = true
  if flags.ItemAt(i) = "k" then ignore_kinds = true
@@ -79,6 +82,7 @@ for i as Integer = 2 to flags.Length()
  if flags.ItemAt(i) = "s" then randomize_starting_gear = true
  if flags.ItemAt(i) = "t" then randomize_treasures = true
  if flags.ItemAt(i) = "u" then include_dummy = true
+ if flags.ItemAt(i) = "v" then randomize_vitals = true
  if flags.ItemAt(i) = "x" then include_extras = true
  if val(flags.ItemAt(i)) = 0 then output_filename += lcase(flags.ItemAt(i))
  if i < flags.Length() then output_filename += " "
@@ -103,6 +107,7 @@ ff4.ReadFromFile(filename)
 #include once "subs/randomizeshops.bas"
 #include once "subs/randomizespellsets.bas"
 #include once "subs/randomizetreasures.bas"
+#include once "subs/randomizevitals.bas"
 #include once "subs/storeequipmentlist.bas"
 
 if seed = -1 then seed = timer
@@ -116,7 +121,8 @@ if randomize_shops then RandomizeShops(include_dummy, balance)
 if randomize_jobs then RandomizeJobs()
 if randomize_names then RandomizeNames(ignore_gender, include_extras)
 if randomize_equips then RandomizeEquips(female_preserve, ignore_kinds)
-if randomize_commands then RandomizeCommands(actor_preserve)
+if randomize_commands then RandomizeCommands(actor_preserve, high_mp)
+if randomize_vitals then RandomizeVitals(high_mp)
 if randomize_spellsets then RandomizeSpellSets()
 FixSingAimEquips()
 if rename_everything then RenameEverything()
