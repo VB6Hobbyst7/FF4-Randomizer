@@ -260,7 +260,7 @@ sub RandomizeCommands(actor_preserve as Boolean, high_mp as Boolean)
       auto_cover = iif(actor_preserve, ff4.JobOfActor(current_actor), current_actor)
      end if
     elseif current_command = twin_command then
-     if not ff4.ActorHasCommand(current_actor, cover_command) then
+     if not ff4.ActorHasCommand(current_actor, cover_command) and actor_preserve then
       do while twinswith(current_actor).Size() > 0
        twin_actor = asc(twinswith(current_actor).Draw())
        if twin_actor <> adult_rydia_actor then twin_actor = ff4.characters(ff4.actors(twin_actor).level_link).character_id
