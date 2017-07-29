@@ -6,6 +6,9 @@ sub RandomizeJobs()
  dim new_job_order as List
  dim new_chart as EquipChart
  dim blank_chart as EquipChart
+ dim address1 as Integer
+ dim address2 as Integer
+ dim bytesequence as String
  
  'Record the spell set assignments.
  ' Changing jobs will change spell set assignments, but here we only want to
@@ -74,5 +77,13 @@ sub RandomizeJobs()
    case fusoya_sprite:      ff4.npcs(i).sprite = ff4.characters(fusoya_character).job_index
   end select
  next
+ 
+ 'Patch the Golbez/Shadow fight to not softlock if Adult Rydia is missing
+ ' Crow/HungryTenor's pastebin patches appear to be for unheadered roms so I
+ ' had to adjust the addresses by adding &h200
+ bytesequence =  chr(&hBD) + chr(&h00) + chr(&h20) + chr(&h29)
+ bytesequence += chr(&h1F) + chr(&hC9) + chr(&h11)
+ ff4.ApplyPatch(&hF10F, bytesequence)
+ ff4.ApplyPatch(&h16355, bytesequence)
  
 end sub

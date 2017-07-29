@@ -35,7 +35,8 @@ sub RandomizeEquips(female_preserve as Boolean, ignore_kinds as Boolean)
  if female_preserve then special_codes.AddItem(chr(female_code))
  if ignore_kinds then
   for i as Integer = 1 to ff4.armors_range.finish
-   if not female_preserve or cbool(ff4.items(i).equip_code <> female_code) then
+   'if not female_preserve or cbool(ff4.items(i).equip_code <> female_code) then
+   if not special_codes.Contains(chr(ff4.items(i).equip_code)) then
     ff4.items(i).equip_code = RollDie(31) - 1
    end if
   next

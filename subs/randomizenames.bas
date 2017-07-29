@@ -44,6 +44,7 @@ sub RandomizeNames(ignore_gender as Boolean, include_extras as Boolean)
  dim temp_names as List
  dim current_name as String
  dim index as Integer
+ dim new_message as String
 
  'Female names
  female_names.AddCard("Rydia")
@@ -278,25 +279,18 @@ sub RandomizeNames(ignore_gender as Boolean, include_extras as Boolean)
   ff4.names(12) = ff4.ConvertText(male_names.Draw())
   ff4.names(13) = ff4.ConvertText(female_names.Draw())
   
-  ff4.ReplaceAll(ff4.ConvertText("Golbez"), ff4.names(12), true)
-  ff4.monsters(golbez_v_tellah_monster).name = ff4.names(12)
-  ff4.monsters(golbez_monster).name = ff4.names(12)
-  
-  text = ff4.ConvertText(trim(ff4.DisplayText(ff4.jobs(ff4.characters(kain_character).job_index).name)))
-  
-  'index = instr(ff4.bank1_messages(prologue_message).text, ff4.ConvertText("Thus, the"))
-  'ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 1) + space_symbol + space_symbol + mid(ff4.bank1_messages(prologue_message).text, index)
-  'if not ff4.characters(dk_character).job_index = dark_knight_job then
-   'index = instr(ff4.bank1_messages(prologue_message).text, ff4.ConvertText("Dark Knight"))
-   'ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 1) + ff4.jobs(ff4.characters(dk_character).job_index).name + mid(ff4.bank1_messages(prologue_message).text, index + 11)
-  'end if
-  index = instr(ff4.bank1_messages(prologue_message).text, ff4.ConvertText("And he and"))
-  ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 2) + mid(ff4.bank1_messages(prologue_message).text, index)
-  'index = instr(ff4.bank1_messages(prologue_message).text, ff4.ConvertText("Dragoon"))
-  'ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 1) + text + mid(ff4.bank1_messages(prologue_message).text, index + 7)
-
  end if
  
+ ff4.ReplaceAll(ff4.ConvertText("Anna"), ff4.names(13), true)
+ ff4.ReplaceAll(ff4.ConvertText("Golbez"), ff4.names(12), true)
+ ff4.monsters(golbez_v_tellah_monster).name = ff4.names(12)
+ ff4.monsters(golbez_monster).name = ff4.names(12)
+ 
+ index = instr(ff4.bank1_messages(prologue_message).text, chr(name_code) + chr(0))
+ ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 2) + mid(ff4.bank1_messages(prologue_message).text, index)
+ index = instr(ff4.bank1_messages(prologue_message).text, ff4.ConvertText("And he and"))
+ ff4.bank1_messages(prologue_message).text = left(ff4.bank1_messages(prologue_message).text, index - 2) + mid(ff4.bank1_messages(prologue_message).text, index)
+
  if include_extras then
  
   for i as Integer = 1 to female_names.Size()
@@ -348,6 +342,7 @@ sub RandomizeNames(ignore_gender as Boolean, include_extras as Boolean)
   male_names.AddCard("KluYa")
   male_names.AddCard("Kory")
   male_names.AddCard("Odin")
+  male_names.AddCard("Gilgmesh")
   
   neutral_names.Append("Calbrena")
   neutral_names.Append("Zeromus")

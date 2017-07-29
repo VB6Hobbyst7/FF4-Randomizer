@@ -52,7 +52,7 @@ dim randomize_starting_gear as Boolean
 dim randomize_treasures as Boolean
 dim randomize_vitals as Boolean
 
-'commandline = "test.smc c h"
+'commandline = "test.smc n g"
 commandline = command
 
 if commandline = "" then end
@@ -132,5 +132,4 @@ FixStartingSpells()
 output_filename = filename_tokens.ItemAt(1) + " (" + str(seed) + " " + output_filename
 
 ff4.WriteToFile(output_filename)
-
 
