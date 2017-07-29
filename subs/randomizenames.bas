@@ -10,6 +10,7 @@ function LongName(short_name as String) as String
   case "Selphy": result = "Selphie"
   case "Qistis": result = "Quistis"
   case "Betrix": result = "Beatrix"
+  case "Melia":  result = "Meliadul"
   case "Ceodor": result = "Ceodore"
   case "Zanget": result = "Zangetsu"
   case "Tsuki":  result = "Tsukinoa"
@@ -23,6 +24,12 @@ function LongName(short_name as String) as String
   case "Sefiro": result = "Sefiroth"
   case "Stiner": result = "Steiner"
   case "Amrant": result = "Amarant"
+  case "Gaff":   result = "Gafgrion"
+  case "Dracla": result = "Draclau"
+  case "Darvon": result = "Daravon"
+  case "Goltan": result = "Goltana"
+  case "Wigraf": result = "Wiegraf"
+  case "Bewulf": result = "Beowulf"
   case else:     result = short_name
  end select
  
@@ -102,6 +109,18 @@ sub RandomizeNames(ignore_gender as Boolean, include_extras as Boolean)
  female_names.AddCard("Lulu")
  female_names.AddCard("Rikku")
  female_names.AddCard("Paine")
+ female_names.AddCard("Agrias")
+ female_names.AddCard("Ovelia")
+ female_names.AddCard("Reis")
+ female_names.AddCard("Lavian")
+ female_names.AddCard("Alicia")
+ female_names.AddCard("Celia")
+ female_names.AddCard("Lede")
+ female_names.AddCard("Melia")
+ female_names.AddCard("Rafa")
+ female_names.AddCard("Alma")
+ female_names.AddCard("Teta")
+ female_names.AddCard("Ultima")
  
  male_names.AddCard("Cecil")
  male_names.AddCard("Kain")
@@ -214,6 +233,27 @@ sub RandomizeNames(ignore_gender as Boolean, include_extras as Boolean)
  male_names.AddCard("Wakka")
  male_names.AddCard("Kimari")
  male_names.AddCard("Jecht")
+ male_names.AddCard("Ramza")
+ male_names.AddCard("Delita")
+ male_names.AddCard("Algus")
+ male_names.AddCard("Malak")
+ male_names.AddCard("Olan")
+ male_names.AddCard("Gaff")
+ male_names.AddCard("Rad")
+ male_names.AddCard("Vormav")
+ male_names.AddCard("Islude")
+ male_names.AddCard("Dracla")
+ male_names.AddCard("Darvon")
+ male_names.AddCard("Goltan")
+ male_names.AddCard("Larg")
+ male_names.AddCard("Zalbag")
+ male_names.AddCard("Elmdor")
+ male_names.AddCard("Orinas")
+ male_names.AddCard("Gustav")
+ male_names.AddCard("Wigraf")
+ male_names.AddCard("Bewulf")
+ male_names.AddCard("Rofel")
+ male_names.AddCard("Ajora")
  
  neutral_names.Append("Syldra")
  neutral_names.Append("Gogo")
@@ -328,6 +368,7 @@ sub RandomizeNames(ignore_gender as Boolean, include_extras as Boolean)
   female_names.AddCard("Cindy")
   female_names.AddCard("Mindy")
   female_names.AddCard("Luca")
+  female_names.AddCard("Valmafra")
   
   male_names.AddCard("Milon")
   male_names.AddCard("Kainazzo")
@@ -343,6 +384,20 @@ sub RandomizeNames(ignore_gender as Boolean, include_extras as Boolean)
   male_names.AddCard("Kory")
   male_names.AddCard("Odin")
   male_names.AddCard("Gilgmesh")
+  male_names.AddCard("Mustadio")
+  male_names.AddCard("Besrodio")
+  male_names.AddCard("Dycedarg")
+  male_names.AddCard("Kletian")
+  male_names.AddCard("Funeral")
+  male_names.AddCard("Balbanes")
+  male_names.AddCard("Golagros")
+  male_names.AddCard("Barinten")
+  male_names.AddCard("Queklain")
+  male_names.AddCard("Elidibus")
+  male_names.AddCard("Velius")
+  male_names.AddCard("Zalera")
+  male_names.AddCard("Hashmal")
+  male_names.AddCard("Adramelk")
   
   neutral_names.Append("Calbrena")
   neutral_names.Append("Zeromus")

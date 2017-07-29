@@ -89,6 +89,11 @@ j - Randomize jobs.
     characters; they will retain their spell sets, commands, etc., unless you
     also set the flags to randomize those as well.
     
+l - Randomize looks of NPCs.
+    This changes the sprites of the NPCs to random ones. Certain NPCs will not
+    be affected and not all NPCs have all poses, so they might "transform"
+    into weird things, especially during plot scenes.
+    
 n - Randomize character names.
     There is a built-in list of character names that it will shuffle up and
     deal out to all the playable characters plus Golbez and Anna. By default,

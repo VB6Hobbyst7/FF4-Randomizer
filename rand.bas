@@ -46,13 +46,14 @@ dim rename_everything as Boolean
 dim randomize_commands as Boolean
 dim randomize_equips as Boolean
 dim randomize_jobs as Boolean
+dim randomize_looks as Boolean
 dim randomize_shops as Boolean
 dim randomize_spellsets as Boolean
 dim randomize_starting_gear as Boolean
 dim randomize_treasures as Boolean
 dim randomize_vitals as Boolean
 
-'commandline = "test.smc n g"
+'commandline = "test.smc l"
 commandline = command
 
 if commandline = "" then end
@@ -76,6 +77,7 @@ for i as Integer = 2 to flags.Length()
  if flags.ItemAt(i) = "i" then randomize_shops = true
  if flags.ItemAt(i) = "j" then randomize_jobs = true
  if flags.ItemAt(i) = "k" then ignore_kinds = true
+ if flags.ItemAt(i) = "l" then randomize_looks = true
  if flags.ItemAt(i) = "n" then randomize_names = true
  if flags.ItemAt(i) = "o" then randomize_spellsets = true
  if flags.ItemAt(i) = "r" then rename_everything = true
@@ -104,6 +106,7 @@ ff4.ReadFromFile(filename)
 #include once "subs/randomizenames.bas"
 #include once "subs/randomizejobs.bas"
 #include once "subs/randomizecommands.bas"
+#include once "subs/randomizelooks.bas"
 #include once "subs/randomizeshops.bas"
 #include once "subs/randomizespellsets.bas"
 #include once "subs/randomizetreasures.bas"
@@ -120,6 +123,7 @@ if randomize_treasures then RandomizeTreasures(include_dummy, balance)
 if randomize_shops then RandomizeShops(include_dummy, balance)
 if randomize_jobs then RandomizeJobs()
 if randomize_names then RandomizeNames(ignore_gender, include_extras)
+if randomize_looks then RandomizeLooks()
 if randomize_equips then RandomizeEquips(female_preserve, ignore_kinds)
 if randomize_commands then RandomizeCommands(actor_preserve, high_mp)
 if randomize_vitals then RandomizeVitals(high_mp)

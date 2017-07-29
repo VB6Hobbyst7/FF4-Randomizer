@@ -9,7 +9,7 @@ h - *High MP progression for non-wizards
 i - *Randomize inventory of shops
 j - *Randomize jobs (appearance)
 k - *Ignore kinds for equip skill randomization 
-l - Randomize looks of NPCs (their sprites)
+l - *Randomize looks of NPCs (their sprites)
 m - Randomize magic list (certain spells only)
 n - *Randomize names
 o - *Randomize order spells are learned in spell sets
