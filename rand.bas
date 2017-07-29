@@ -53,7 +53,7 @@ dim randomize_starting_gear as Boolean
 dim randomize_treasures as Boolean
 dim randomize_vitals as Boolean
 
-'commandline = "test.smc l"
+'commandline = "test.smc v"
 commandline = command
 
 if commandline = "" then end

@@ -49,14 +49,20 @@ sub RandomizeVitals(high_mp as Boolean)
  for character_index as Integer = 0 to total_characters
   sum = 0
   for i as Integer = 1 to 7
-   stats(i) = RollDie(5)
+   if i = 2 then
+    stats(i) = 1 + RollDie(4)
+   else
+    stats(i) = RollDie(5)
+   end if
    sum += stats(i)
   next
   do while sum > 21
    current_stat = RollDie(7)
    if stats(current_stat) > 1 then
-    stats(current_stat) -= 1
-    sum -= 1
+    if current_stat <> 2 or stats(current_stat) > 2 then
+     stats(current_stat) -= 1
+     sum -= 1
+    end if
    end if
   loop
   do while sum < 21
@@ -66,11 +72,23 @@ sub RandomizeVitals(high_mp as Boolean)
     sum += 1
    end if
   loop
+  'Debug begin
+  if character_index = paladin_character then 
+   stats(6) = 1
+   stats(2) = 2
+  end if
+  'Debug end
   for i as Integer = 1 to 5
-   ff4.characters(character_index).stats(i - 1) = starting_base(stats(i)) + levelup_bonus(stats(i)) * ff4.characters(character_index).level \ 8 + RollDie(levelup_bonus(stats(i)) + 2) - (levelup_bonus(stats(i)) + 3) \ 2
+   ff4.characters(character_index).stats(i - 1) = Max(1, starting_base(stats(i)) + levelup_bonus(stats(i)) * ff4.characters(character_index).level \ 8 + RollDie(levelup_bonus(stats(i)) + 2) - (levelup_bonus(stats(i)) + 3) \ 2)
    for j as Integer = ff4.characters(character_index).level to 69
-    ff4.characters(character_index).levelups(j).stat_bonus.amount = 1
-    ff4.characters(character_index).levelups(j).stat_bonus.stats(i - 1) = iif(RollDie(8) <= levelup_bonus(stats(i)), true, false)
+    if character_index = paladin_character and j <= 30 and RollDie(2) = 1 then
+     ff4.characters(character_index).levelups(j).stat_bonus.amount = 0
+     ff4.characters(character_index).levelups(j).stat_bonus.stats(i - 1) = false
+     ff4.characters(character_index).stats(i - 1) += iif(RollDie(8) <= levelup_bonus(stats(i)), 1, 0)
+    else
+     ff4.characters(character_index).levelups(j).stat_bonus.amount = 1
+     ff4.characters(character_index).levelups(j).stat_bonus.stats(i - 1) = iif(RollDie(8) <= levelup_bonus(stats(i)), true, false)
+    end if
    next
   next
   ff4.characters(character_index).max_hp = hp_base(stats(6))
@@ -79,6 +97,18 @@ sub RandomizeVitals(high_mp as Boolean)
     ff4.characters(character_index).max_hp += hp_levelup(stats(6)) * (i \ 8 + 1)
    else
     ff4.characters(character_index).levelups(i).hp_bonus = hp_levelup(stats(6)) * (i \ 8 + 1)
+    if character_index = paladin_character then
+     if i <= 10 then
+      ff4.characters(character_index).max_hp += ff4.characters(character_index).levelups(i).hp_bonus * 4 \ 5
+      ff4.characters(character_index).levelups(i).hp_bonus -= ff4.characters(character_index).levelups(i).hp_bonus * 4 \ 5
+     elseif i <= 20 then 
+      ff4.characters(character_index).max_hp += ff4.characters(character_index).levelups(i).hp_bonus * 3 \ 5
+      ff4.characters(character_index).levelups(i).hp_bonus -= ff4.characters(character_index).levelups(i).hp_bonus * 3 \ 5
+     elseif i <= 30 then
+      ff4.characters(character_index).max_hp += ff4.characters(character_index).levelups(i).hp_bonus * 2 \ 5
+      ff4.characters(character_index).levelups(i).hp_bonus -= ff4.characters(character_index).levelups(i).hp_bonus * 2 \ 5
+     end if
+    end if
    end if
   next
   if high_mp and cbool(stats(7) < 5) then stats(7) += 1
