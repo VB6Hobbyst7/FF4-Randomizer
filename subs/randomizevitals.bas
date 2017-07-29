@@ -73,10 +73,10 @@ sub RandomizeVitals(high_mp as Boolean)
    end if
   loop
   'Debug begin
-  if character_index = paladin_character then 
-   stats(6) = 1
-   stats(2) = 2
-  end if
+  'if character_index = paladin_character then 
+   'stats(6) = 1
+   'stats(2) = 2
+  'end if
   'Debug end
   for i as Integer = 1 to 5
    ff4.characters(character_index).stats(i - 1) = Max(1, starting_base(stats(i)) + levelup_bonus(stats(i)) * ff4.characters(character_index).level \ 8 + RollDie(levelup_bonus(stats(i)) + 2) - (levelup_bonus(stats(i)) + 3) \ 2)
